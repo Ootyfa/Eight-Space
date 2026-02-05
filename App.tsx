@@ -37,6 +37,18 @@ const App: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
   const navItems: Page[] = ['Exhibition', 'Artists', 'About', 'Visit'];
 
   const handleNavClick = (page: Page) => {
@@ -69,13 +81,13 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-gallery-50 text-gallery-900 font-sans flex flex-col">
       
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 z-30 transition-all duration-500 ${isScrolled || mobileMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-sm py-2' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+      {/* Navigation Header */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || mobileMenuOpen ? 'bg-white shadow-sm py-2' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center relative">
           
           {/* Logo */}
           <div className="flex items-center cursor-pointer" onClick={() => handleNavClick('Exhibition')}>
-             <img src={LOGO_URL} alt="Eight Space Logo" className="h-16 w-auto object-contain" />
+             <img src={LOGO_URL} alt="Eight Space Logo" className="h-10 md:h-16 w-auto object-contain transition-all duration-300" />
           </div>
           
           {/* Desktop Menu */}
@@ -93,24 +105,24 @@ const App: React.FC = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden z-50 text-gallery-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden text-gallery-900 p-2 z-50" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
              {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
-
-        {/* Mobile Menu Overlay */}
-        <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-500 md:hidden ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-           {navItems.map((item) => (
-              <button
-                key={item}
-                onClick={() => handleNavClick(item)}
-                className={`text-2xl font-medium tracking-widest uppercase ${currentPage === item ? 'text-gallery-900 border-b-2 border-[#86CEB3]' : 'text-gray-500'}`}
-              >
-                {item}
-              </button>
-            ))}
-        </div>
       </nav>
+
+      {/* Mobile Menu Overlay - Moved outside nav to prevent context issues */}
+      <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-start pt-32 gap-8 transition-transform duration-500 md:hidden overflow-y-auto ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+          {navItems.map((item) => (
+            <button
+              key={item}
+              onClick={() => handleNavClick(item)}
+              className={`text-2xl font-medium tracking-widest uppercase py-2 ${currentPage === item ? 'text-gallery-900 border-b-2 border-[#86CEB3]' : 'text-gray-500'}`}
+            >
+              {item}
+            </button>
+          ))}
+      </div>
 
       {/* Main Content Area */}
       <main className="flex-grow pt-32 pb-20 px-6 max-w-7xl mx-auto w-full">
