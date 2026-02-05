@@ -19,7 +19,7 @@ const AboutView: React.FC = () => {
 
         {/* What We Believe */}
         <section>
-          <h3 className="font-serif text-2xl mb-6 text-gallery-900 italic">What We Believe</h3>
+          <h3 className="font-serif text-2xl mb-6 text-gallery-900">What We Believe</h3>
           <p className="mb-6">
             <strong className="font-medium text-gallery-900">Exhibition-making is an art form in itself.</strong>
           </p>
@@ -36,7 +36,7 @@ const AboutView: React.FC = () => {
 
         {/* Our Approach */}
         <section>
-          <h3 className="font-serif text-2xl mb-6 text-gallery-900 italic">Our Approach</h3>
+          <h3 className="font-serif text-2xl mb-6 text-gallery-900">Our Approach</h3>
           <p className="mb-6">
             Nestled within Mitchell Studio at 50 Elm Street, The Eight Space exists alongside active artistic practice. This embedded model creates flexibility, immediacy, and ongoing conversation between production and presentation.
           </p>
@@ -50,7 +50,7 @@ const AboutView: React.FC = () => {
 
         {/* Our Place in New Haven */}
         <section className="bg-white p-8 md:p-10 border border-gallery-200 shadow-sm rounded-sm">
-          <h3 className="font-serif text-2xl mb-6 text-gallery-900 italic">Our Place in New Haven</h3>
+          <h3 className="font-serif text-2xl mb-6 text-gallery-900">Our Place in New Haven</h3>
           <p className="mb-6">
             New Haven provides a unique environment for this work shaped by Yale University's intellectual culture, a dense network of cultural institutions, and an intimate scale that supports genuine local engagement.
           </p>
