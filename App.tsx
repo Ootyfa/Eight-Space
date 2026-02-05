@@ -130,9 +130,6 @@ const App: React.FC = () => {
           <>
             <div className="text-center mb-12 animate-in slide-in-from-bottom-5 duration-700">
                <h1 className="font-serif text-5xl md:text-7xl mb-6 text-gallery-900">Current Exhibition</h1>
-               <p className="text-gray-500 max-w-xl mx-auto text-lg font-light">
-                 A dialogue between texture, light, and the digital frontier.
-               </p>
             </div>
             <ExhibitionView 
               key={exhibitionKey}
